@@ -47,6 +47,11 @@ teleport:
 fall-damage: true
 #Do you allow lava damage?
 lava-damage: true
+
+# Other
+# Set the commands to disabled here.
+disable-command:
+  - "about"
 ```
 ----------------
 
