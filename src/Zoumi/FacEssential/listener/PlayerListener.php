@@ -24,6 +24,10 @@ class PlayerListener implements Listener {
     public function onQuit(PlayerQuitEvent $event){
         $player = $event->getPlayer();
         $event->setQuitMessage(null);
+        if (isset(Main::getInstance()->combatLogger[$player->getName()])){
+            $player->kill();
+            unset(Main::getInstance()->combatLogger[$player->getName()]);
+        }
         FunctionListener::sendBroadcastByFormat(Main::getInstance()->manager->get("connect-disconnect")["format"], str_replace("{player}", $player->getName(), Main::getInstance()->manager->get("connect-disconnect")["disconnect-message"]));
     }
 
