@@ -1,0 +1,6 @@
+name: FacEssential
+api: 3.0.0
+version: Beta
+main: Zoumi\FacEssential\Main
+author: Zoumi
+description: "Essential plugin for a server PvP Faction."

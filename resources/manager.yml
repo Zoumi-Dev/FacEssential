@@ -1,0 +1,35 @@
+# Connect/Disconnect Message
+connect-disconnect:
+  # Message format. (popup, tip or message)
+  format: "popup"
+  # Connection message. {player} = name of player (broadcast)
+  connect-message: "§7[§2+§7] §2{player}"
+  # Disconnect message. {player} = name of player (broadcast)
+  disconnect-message: "§7[§4-§7] §4{player}"
+  # First connection message. {player} = name of player (broadcast message)
+  first-connect-message: "§e{player} §fhas just logged on for the first time, welcome!"
+
+# Combat Logger
+combat-logger:
+  # How long does it take for the combat logger to come off? (in second)
+  cooldown-combat-logger: 15
+  # Do you want to display a time remaining message for the combat logger?
+  display-cooldown-combat-logger: true
+
+# Teleport
+teleport:
+  # Do you want players to be immune to each teleportation for a certain time?
+  immune-players: false
+  # If so, for how long?
+  immune-time: 15
+
+# Damage
+# Do you allow fall damage?
+fall-damage: true
+#Do you allow lava damage?
+lava-damage: true
+
+# Other
+# Set the commands to disabled here.
+disable-command:
+  - "about"
