@@ -82,13 +82,22 @@ Commands
 
 | Command        | Description                                       | Available for    |
 |----------------|---------------------------------------------------|------------------|
-| none           | none                                              | none              |
+| `/enderchest`  | Allows you to open an enderchest.                 | use.enderchest   |
+| `/top`         | Allows you to teleport to the surface.            | use.top          |
 ------------------
 Configuration file
 ------------------
 * All additions to the configuration file.
 ```yaml
-none
+# Scoreboard
+scoreboard:
+  # Do you want to activate the scoreboard?
+  enable: false
+  # Insert the title of the score board here.
+  title: "§f(§bFE§f)"
+  lines:
+  # Put your line here
+    - "test"                                    # You can use {player} = name of player, {faction} = faction by FactionsPro, {money} = money of this plugin and {rank} = rank by PureChat. 
 ```
 ----------------
 Support
