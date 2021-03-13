@@ -10,6 +10,7 @@ use Zoumi\FacEssential\command\basic\Heal;
 use Zoumi\FacEssential\command\money\AddMoney;
 use Zoumi\FacEssential\command\money\Money;
 use Zoumi\FacEssential\command\money\RemoveMoney;
+use Zoumi\FacEssential\command\money\SetMoney;
 use Zoumi\FacEssential\command\money\TakeMoney;
 use Zoumi\FacEssential\command\money\TopMoney;
 use Zoumi\FacEssential\command\teleport\TPA;
@@ -58,7 +59,8 @@ class Main extends PluginBase implements Listener {
                 new TakeMoney("takemoney", "Allows you to send money to a player.", "/takemoney", []),
                 new AddMoney("addmoney", "Allows you to add money to a player.", "/addmoney", []),
                 new RemoveMoney("removemoney", "Allows you to withdraw money from a player.", "/removemoney", []),
-                new TopMoney("topmoney", "Allows you to see the top 10 players with the most money.", "/topmoney", [])
+                new TopMoney("topmoney", "Allows you to see the top 10 players with the most money.", "/topmoney", []),
+                new SetMoney("setmoney", "Allows you to define a player's money.", "/setmoney", [])
             ]);
         }
         $this->getServer()->getCommandMap()->registerAll("FacEssential", [
