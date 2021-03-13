@@ -1,6 +1,12 @@
 name: FacEssential
 api: 3.0.0
-version: Beta
+version: 1.0.1-BETA
 main: Zoumi\FacEssential\Main
 author: Zoumi
-description: "Essential plugin for a server PvP Faction."
+description: "FacEssential is a Core for PMMP, it gathers all kind of plugins needed to create a faction server. It was created from scratch by Clouds#0667."
+
+permissions:
+  use.feed:
+    default: op
+  use.heal:
+    default: op

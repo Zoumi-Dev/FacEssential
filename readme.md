@@ -1,18 +1,24 @@
 FacEssential
+============
 * **FacEssential** is a Core for **PMMP**, it gathers all kind of plugins needed to create a faction server. It was created from scratch by **Clouds#0667**. 
 ---------------
 Available orders 
 ----------------
 * Table of commands below, the * character means all.
 
-| Command     | Description                                   | Permission    |
-|-------------|-----------------------------------------------|---------------|
-| `/tpa`      | Allows you to teleport to a player.           | all           |
-| `/tpahere`  | Allows to teleport to you.                    | all           |
-| `/tpaccept` | Allows you to accept a teleportation request. | all           |
-| `/tpdeny`   | Allows you to refuse a teleportation request. | all           |
-| `/feed`     | Allows you to feed a player or yourself.      | use.feed      |
-| `/heal`     | Allows you to heal a player or yourself.      | use.heal      |
+| Command        | Description                                       | Permission       |
+|----------------|---------------------------------------------------|------------------|
+| `/tpa`         | Allows you to teleport to a player.               | all              |
+| `/tpahere`     | Allows to teleport to you.                        | all              |
+| `/tpaccept`    | Allows you to accept a teleportation request.     | all              |
+| `/tpdeny`      | Allows you to refuse a teleportation request.     | all              |
+| `/feed`        | Allows you to feed a player or yourself.          | use.feed         |
+| `/heal`        | Allows you to heal a player or yourself.          | use.heal         |
+| `/money`       | Allows you to see your money or a player's money. | all              |
+| `/takemoney`   | Allows you to send money to a player.             | all              |
+| `/addmoney`    | Allows you to add money to a player.              | use.add.money    |
+| `/removemoney` | Allows you to withdraw money from a player.       | use.remove.money |
+| `/setmoney`    | Allows you to define a player's money.            | use.set.money    |
 -----
 Here is the configuration file
 ------------------------------
@@ -63,11 +69,7 @@ Commands
 
 | Command        | Description                                       | Available for    |
 |----------------|---------------------------------------------------|------------------|
-| `/money`       | Allows you to see your money or a player's money. | all              |
-| `/takemoney`   | Allows you to send money to a player.             | all              |
-| `/addmoney`    | Allows you to add money to a player.              | use.add.money    |
-| `/removemoney` | Allows you to withdraw money from a player.       | use.remove.money |
-| `/setmoney`    | Allows you to define a player's money.            | use.set.money    |
+| none           | none                                              | none              |
 
 Config
 ------

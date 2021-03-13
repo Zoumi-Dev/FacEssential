@@ -6,11 +6,22 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
+use Zoumi\FacEssential\api\Money;
 use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class PlayerListener implements Listener {
+
+    public function onPreLogin(PlayerPreLoginEvent $event){
+        $player = $event->getPlayer();
+        if (Main::getInstance()->manager->get("enable-money")){
+            if (!Money::haveAccount($player)) {
+                Money::createAccount($player);
+            }
+        }
+    }
 
     public function onJoin(PlayerJoinEvent $event){
         $player = $event->getPlayer();

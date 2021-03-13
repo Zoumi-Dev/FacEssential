@@ -7,6 +7,11 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use Zoumi\FacEssential\command\basic\Feed;
 use Zoumi\FacEssential\command\basic\Heal;
+use Zoumi\FacEssential\command\money\AddMoney;
+use Zoumi\FacEssential\command\money\Money;
+use Zoumi\FacEssential\command\money\RemoveMoney;
+use Zoumi\FacEssential\command\money\TakeMoney;
+use Zoumi\FacEssential\command\money\TopMoney;
 use Zoumi\FacEssential\command\teleport\TPA;
 use Zoumi\FacEssential\command\teleport\TPAccept;
 use Zoumi\FacEssential\command\teleport\TPAHere;
@@ -31,6 +36,9 @@ class Main extends PluginBase implements Listener {
     /* CONFIG */
     public Config $manager;
 
+    /* SQL */
+    public \SQLite3 $database;
+
     public static function getInstance(): self{
         return self::$instance;
     }
@@ -40,7 +48,19 @@ class Main extends PluginBase implements Listener {
         $this->getLogger()->info("est activer.");
         self::$instance = $this;
 
+        /* CONFIG */
+        $this->manager = new Config($this->getDataFolder() . "manager.yml", Config::YAML);
+
         /* Commande */
+        if (Main::getInstance()->manager->get("enable-money")){
+            $this->getServer()->getCommandMap()->registerAll("FacEssential-Money", [
+                new Money("money", "Allows you to see your money or a player's money.", "/money", []),
+                new TakeMoney("takemoney", "Allows you to send money to a player.", "/takemoney", []),
+                new AddMoney("addmoney", "Allows you to add money to a player.", "/addmoney", []),
+                new RemoveMoney("removemoney", "Allows you to withdraw money from a player.", "/removemoney", []),
+                new TopMoney("topmoney", "Allows you to see the top 10 players with the most money.", "/topmoney", [])
+            ]);
+        }
         $this->getServer()->getCommandMap()->registerAll("FacEssential", [
             /* TELEPORT */
             new TPA("tpa", "Allows you to teleport to a player.", "/tpa", []),
@@ -59,8 +79,9 @@ class Main extends PluginBase implements Listener {
 
         /* Task */
 
-        /* CONFIG */
-        $this->manager = new Config($this->getDataFolder() . "manager.yml", Config::YAML);
+        /* SQL */
+        $this->database = new \SQLite3($this->getDataFolder() . "Money.db");
+        $this->database->query("CREATE TABLE IF NOT EXISTS money (pseudo VARCHAR(55) PRIMARY KEY, money INT)");
 
         /* SETUP */
         $this->setupFile();
@@ -112,6 +133,18 @@ class Main extends PluginBase implements Listener {
                 }
             }catch (CommandErrorException $exception){
                 throw new CommandErrorException("Command $command not found.");
+            }
+        }
+    }
+
+    public function setupTable(): void{
+        $table = DataBase::getDataBaseOfNetwork()->query("CREATE TABLE IF NOT EXISTS pvpbox (pseudo VARCHAR(55) PRIMARY KEY, token INT , prestige VARCHAR(55), level INT, xp INT, frag INT, death INT, kd INT, boxcommune INT, clan VARCHAR(55));");
+        if(!$table){
+            try {
+                Main::getInstance()->getLogger()->info("Table pvpbox créer.");
+                $table->close();
+            }catch (MySQLErrorException $exception){
+                Main::getInstance()->getLogger()->info("Table pvpbox non créer.");
             }
         }
     }

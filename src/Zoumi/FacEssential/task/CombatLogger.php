@@ -8,6 +8,10 @@ use Zoumi\FacEssential\Main;
 
 class CombatLogger extends Task {
 
+    private Player $damager;
+
+    private Player $entity;
+
     public function __construct(Player $damager, Player $entity)
     {
         $this->damager = $damager;
