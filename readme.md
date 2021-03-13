@@ -22,6 +22,8 @@ Available orders
 | `/removemoney` | Allows you to withdraw money from a player.              | use.remove.money |
 | `/setmoney`    | Allows you to define a player's money.                   | use.set.money    |
 | `/topmoney`    | Allows you to see the top 10 players with the most money.| all              |
+| `/craft`       | Allows you to open a craftingtable.                      | user.craft       |
+
 -----
 Configuration file
 ==================

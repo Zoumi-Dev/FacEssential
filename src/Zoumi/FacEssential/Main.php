@@ -5,6 +5,7 @@ namespace Zoumi\FacEssential;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use Zoumi\FacEssential\command\basic\Craft;
 use Zoumi\FacEssential\command\basic\Feed;
 use Zoumi\FacEssential\command\basic\Heal;
 use Zoumi\FacEssential\command\money\AddMoney;
@@ -70,7 +71,8 @@ class Main extends PluginBase implements Listener {
 
             /* BASIC */
             new Feed("feed", "Allows you to feed a player or yourself.", "/feed", []),
-            new Heal("heal", "Allows you to heal a player or yourself.", "/heal", [])
+            new Heal("heal", "Allows you to heal a player or yourself.", "/heal", []),
+            new Craft("craft", "Allows you to open a crafting table.", "/craft", [])
         ]);
 
         /* Events */
