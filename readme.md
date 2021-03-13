@@ -73,7 +73,7 @@ Coming Soon
 -----------
 Soon
 ----
-* An economy will be put in place with the possibility of activating it or not.
+* none
 --------
 Commands
 --------
@@ -87,11 +87,7 @@ Configuration file
 ------------------
 * All additions to the configuration file.
 ```yaml
-# MONEY
-# Do you want to activate the economy? (money)
-enable-money: true
-# If so, how much money do players start with?
-money-start: 1000
+none
 ```
 ----------------
 Support
