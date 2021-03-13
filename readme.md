@@ -68,6 +68,7 @@ Commands
 | `/addmoney`    | Allows you to add money to a player.              | use.add.money    |
 | `/removemoney` | Allows you to withdraw money from a player.       | use.remove.money |
 | `/setmoney`    | Allows you to define a player's money.            | use.set.money    |
+
 Config
 ------
 * All additions to the configuration file.
