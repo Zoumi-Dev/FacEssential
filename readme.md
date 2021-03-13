@@ -55,6 +55,10 @@ disable-command:
   - "about"
 ```
 ----------------
+Coming Soon
+===========
+* An economy will be put in place with the possibility of activating it or not.
+-----------
 
 If you have any **ideas** for additions or a **bug** to report, please join the server discord by clicking [here](https://discord.gg/kARpD3DsdU).
 
