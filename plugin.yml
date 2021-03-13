@@ -16,3 +16,5 @@ permissions:
     default: op
   use.set.money:
     default: op
+  use.craft:
+    default: op
