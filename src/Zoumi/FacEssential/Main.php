@@ -137,16 +137,4 @@ class Main extends PluginBase implements Listener {
         }
     }
 
-    public function setupTable(): void{
-        $table = DataBase::getDataBaseOfNetwork()->query("CREATE TABLE IF NOT EXISTS pvpbox (pseudo VARCHAR(55) PRIMARY KEY, token INT , prestige VARCHAR(55), level INT, xp INT, frag INT, death INT, kd INT, boxcommune INT, clan VARCHAR(55));");
-        if(!$table){
-            try {
-                Main::getInstance()->getLogger()->info("Table pvpbox créer.");
-                $table->close();
-            }catch (MySQLErrorException $exception){
-                Main::getInstance()->getLogger()->info("Table pvpbox non créer.");
-            }
-        }
-    }
-
 }

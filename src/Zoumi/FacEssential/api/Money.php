@@ -49,7 +49,7 @@ class Money {
 
             $calcul = $row['money'] - $row;
 
-            Main::getInstance()->database->query("UPDATE money SET money='" . $calcul . "' WHERE pseudo='" . $player->getName() . "'");
+            Main::getInstance()->database->query("UPDATE money SET money='" . $calcul . "' WHERE pseudo='" . $player . "'");
 
             Main::getInstance()->database->close();
 
