@@ -72,6 +72,16 @@ class Money {
         }
     }
 
+    public static function setMoney(string $player, int $money){
+        try {
+
+            Main::getInstance()->database->query("UPDATE money SET money='" . $money . "' WHERE pseudo='" . $player . "'");
+
+        }catch (\mysqli_sql_exception $exception){
+
+        }
+    }
+
     public static function getTopMoney($player){
         try{
 

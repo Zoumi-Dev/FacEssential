@@ -14,3 +14,5 @@ permissions:
     default: op
   use.remove.money:
     default: op
+  use.set.money:
+    default: op

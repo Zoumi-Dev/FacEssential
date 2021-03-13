@@ -105,4 +105,9 @@ Support
 -------
 If you have any **ideas** for additions or a **bug** to report, please join the server discord by clicking [here](https://discord.gg/kARpD3DsdU).
 
+------
+Credit
+======
+* Thanks to AyzrixYT for the Craft order and to the people who suggested ideas!
+
 
