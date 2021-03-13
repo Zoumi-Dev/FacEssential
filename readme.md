@@ -58,6 +58,12 @@ lava-damage: true
 # Set the commands to disabled here.
 disable-command:
   - "about"
+
+# MONEY
+# Do you want to activate the economy? (money)
+enable-money: true
+# If so, how much money do players start with?
+money-start: 1000
 ```
 Coming Soon
 ===========
@@ -75,11 +81,7 @@ Config
 ------
 * All additions to the configuration file.
 ```yaml
-# MONEY
-# Do you want to activate the economy? (money)
-enable-money: true
-# If so, how much money do players start with?
-money-start: 1000
+none
 ```
 ----------------
 
