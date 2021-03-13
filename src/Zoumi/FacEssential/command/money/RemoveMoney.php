@@ -18,7 +18,7 @@ class RemoveMoney extends Command {
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if ($sender instanceof Player){
-            if ($sender->hasPermission("use.add.money")){
+            if ($sender->hasPermission("use.remove.money")){
                 if (!isset($args[1])){
                     $sender->sendMessage(Manager::PREFIX . "Please do /removemoney [player] [money].");
                     return;

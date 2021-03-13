@@ -10,3 +10,7 @@ permissions:
     default: op
   use.heal:
     default: op
+  use.add.money:
+    default: op
+  use.remove.money:
+    default: op
