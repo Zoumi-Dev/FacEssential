@@ -6,8 +6,10 @@ use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use Zoumi\FacEssential\command\basic\Craft;
+use Zoumi\FacEssential\command\basic\EnderChest;
 use Zoumi\FacEssential\command\basic\Feed;
 use Zoumi\FacEssential\command\basic\Heal;
+use Zoumi\FacEssential\command\basic\Top;
 use Zoumi\FacEssential\command\money\AddMoney;
 use Zoumi\FacEssential\command\money\Money;
 use Zoumi\FacEssential\command\money\RemoveMoney;
@@ -74,7 +76,9 @@ class Main extends PluginBase implements Listener {
             /* BASIC */
             new Feed("feed", "Allows you to feed a player or yourself.", "/feed", []),
             new Heal("heal", "Allows you to heal a player or yourself.", "/heal", []),
-            new Craft("craft", "Allows you to open a crafting table.", "/craft", [])
+            new Craft("craft", "Allows you to open a crafting table.", "/craft", []),
+            new EnderChest("enderchest", "Allows you to open an enderchest.", "/enderchest", ["ec"]),
+            new Top("top", "Allows you to teleport to the surface.", "/top", ["surface"])
         ]);
 
         /* Events */

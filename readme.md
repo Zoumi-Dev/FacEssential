@@ -23,6 +23,8 @@ Available orders
 | `/setmoney`    | Allows you to define a player's money.                   | use.set.money    |
 | `/topmoney`    | Allows you to see the top 10 players with the most money.| all              |
 | `/craft`       | Allows you to open a crafting table.                     | use.craft        |
+| `/enderchest`  | Allows you to open an enderchest.                        | use.enderchest   |
+| `/top`         | Allows you to teleport to the surface.                   | use.top          |
 -----
 Configuration file
 ==================
@@ -83,8 +85,7 @@ Commands
 
 | Command        | Description                                       | Available for    |
 |----------------|---------------------------------------------------|------------------|
-| `/enderchest`  | Allows you to open an enderchest.                 | use.enderchest   |
-| `/top`         | Allows you to teleport to the surface.            | use.top          |
+| none           | none                                              | none             |
 ------------------
 Configuration file
 ------------------
