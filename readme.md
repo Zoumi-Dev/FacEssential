@@ -82,7 +82,10 @@ Commands
 
 | Command        | Description                                       | Available for    |
 |----------------|---------------------------------------------------|------------------|
-| none           | none                                              | none              |
+| `/ec`          | Open enderchest                                   | permission       |
+| `/rank`        | Rank Manager                                      | OP               |
+| `/market`      | Open market                                       | all              |
+| none           | none                                              | none             |
 ------------------
 Configuration file
 ------------------
