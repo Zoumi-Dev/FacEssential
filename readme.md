@@ -1,5 +1,4 @@
 FacEssential
-============
 * **FacEssential** is a Core for **PMMP**, it gathers all kind of plugins needed to create a faction server. It was created from scratch by **Clouds#0667**. 
 ---------------
 Available orders 
@@ -8,10 +7,10 @@ Available orders
 
 | Command     | Description                                   | Permission    |
 |-------------|-----------------------------------------------|---------------|
-| `/tpa`      | Allows you to teleport to a player.           | *             |
-| `/tpahere`  | Allows to teleport to you.                    | *             |
-| `/tpaccept` | Allows you to accept a teleportation request. | *             |
-| `/tpdeny`   | Allows you to refuse a teleportation request. | *             |
+| `/tpa`      | Allows you to teleport to a player.           | all           |
+| `/tpahere`  | Allows to teleport to you.                    | all           |
+| `/tpaccept` | Allows you to accept a teleportation request. | all           |
+| `/tpdeny`   | Allows you to refuse a teleportation request. | all           |
 | `/feed`     | Allows you to feed a player or yourself.      | use.feed      |
 | `/heal`     | Allows you to heal a player or yourself.      | use.heal      |
 -----
@@ -54,11 +53,32 @@ lava-damage: true
 disable-command:
   - "about"
 ```
-----------------
 Coming Soon
 ===========
 * An economy will be put in place with the possibility of activating it or not.
------------
+
+Commands
+--------
+* All new orders that will be available.
+
+| Command        | Description                                       | Available for    |
+|----------------|---------------------------------------------------|------------------|
+| `/money`       | Allows you to see your money or a player's money. | all              |
+| `/takemoney`   | Allows you to send money to a player.             | all              |
+| `/addmoney`    | Allows you to add money to a player.              | use.add.money    |
+| `/removemoney` | Allows you to withdraw money from a player.       | use.remove.money |
+| `/setmoney`    | Allows you to define a player's money.            | use.set.money    |
+Config
+------
+* All additions to the configuration file.
+```yaml
+# MONEY
+# Do you want to activate the economy? (money)
+enable-money: true
+# If so, how much money do players start with?
+money-start: 1000
+```
+----------------
 
 If you have any **ideas** for additions or a **bug** to report, please join the server discord by clicking [here](https://discord.gg/kARpD3DsdU).
 
