@@ -3,7 +3,7 @@ FacEssential
 * **FacEssential** is a Core for **PMMP**, it gathers all kind of plugins needed to create a faction server. It was created from scratch by **Clouds#0667**. 
 ---------------
 Available orders 
-----------------
+================
 * Table of commands below, the * character means all.
 
 | Command        | Description                                       | Permission       |
@@ -20,8 +20,8 @@ Available orders
 | `/removemoney` | Allows you to withdraw money from a player.       | use.remove.money |
 | `/setmoney`    | Allows you to define a player's money.            | use.set.money    |
 -----
-Here is the configuration file
-------------------------------
+Configuration file
+==================
 ```yaml
 # Connect/Disconnect Message
 connect-disconnect:
@@ -58,6 +58,12 @@ lava-damage: true
 # Set the commands to disabled here.
 disable-command:
   - "about"
+
+# MONEY
+# Do you want to activate the economy? (money)
+enable-money: true
+# If so, how much money do players start with?
+money-start: 1000
 ```
 Coming Soon
 ===========
@@ -71,7 +77,7 @@ Commands
 |----------------|---------------------------------------------------|------------------|
 | none           | none                                              | none              |
 
-Config
+Configuration file
 ------
 * All additions to the configuration file.
 ```yaml
@@ -82,7 +88,8 @@ enable-money: true
 money-start: 1000
 ```
 ----------------
-
+Support
+=======
 If you have any **ideas** for additions or a **bug** to report, please join the server discord by clicking [here](https://discord.gg/kARpD3DsdU).
 
 
