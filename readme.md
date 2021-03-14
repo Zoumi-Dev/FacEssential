@@ -3,7 +3,7 @@ FacEssential
 ------------
 * **FacEssential** is a Core for **PMMP**, it gathers all kind of plugins needed to create a faction server. It was created from scratch by **Clouds#0667**.
 
-Available orders 
+Available commands 
 ================
 ----------------
 * Table of commands below, the * character means all.
