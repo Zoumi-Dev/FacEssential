@@ -36,6 +36,8 @@ class Main extends PluginBase implements Listener {
     public array $teleport = [];
     /** @var array $immune */
     public array $immune = [];
+    /** @var array $scoreboard */
+    public array $scoreboard = [];
 
     /* CONFIG */
     public Config $manager;
@@ -49,7 +51,7 @@ class Main extends PluginBase implements Listener {
 
     public function onEnable()
     {
-        $this->getLogger()->info("est activer.");
+        $this->getLogger()->info("is enable.");
         self::$instance = $this;
 
         /* CONFIG */
@@ -90,6 +92,7 @@ class Main extends PluginBase implements Listener {
         /* SQL */
         $this->database = new \SQLite3($this->getDataFolder() . "Money.db");
         $this->database->query("CREATE TABLE IF NOT EXISTS money (pseudo VARCHAR(55) PRIMARY KEY, money INT)");
+        $this->database->query("CREATE TABLE IF NOT EXISTS home (id INT INCREMENT PRIMARY KEY, pseudo VARCHAR(55), home VARCHAR(15), x FLOAT, y INT, z FLOAT)");
 
         /* SETUP */
         $this->setupFile();
