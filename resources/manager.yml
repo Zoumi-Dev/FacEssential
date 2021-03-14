@@ -39,3 +39,15 @@ disable-command:
 enable-money: true
 # If so, how much money do players start with?
 money-start: 1000
+
+# Scoreboard
+scoreboard:
+  # Do you want to activate the scoreboard?
+  enable: true
+  # When should the scoreboard be updated? (20 tick = 1 second)
+  update-tick: 20
+  # Insert the title of the score board here.
+  title: "§f(§bFE§f)"
+  lines:
+    # Put your line here
+    - "§3By §bZoumi"                                    # You can use {player} = name of player, {faction} = faction by FactionsPro, {money} = money of this plugin and {rank} = rank by PureChat.
