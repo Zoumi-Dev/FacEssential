@@ -5,4 +5,5 @@ branches:
 projects:
   FacEssential:
     path: ""
+    icon: "./icon.png"
 ...

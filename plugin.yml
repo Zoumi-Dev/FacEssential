@@ -18,3 +18,19 @@ permissions:
     default: op
   use.craft:
     default: op
+  use.create.rank:
+    default: op
+  use.remove.rank:
+    default: op
+  use.set.rank:
+    default: op
+  use.list.rank:
+    default: op
+  use.add.perm:
+    default: op
+  use.remove.perm:
+    default: op
+  use.set.format:
+    default: op
+  use.set.default:
+    default: op
