@@ -16,6 +16,14 @@ use Zoumi\FacEssential\command\money\RemoveMoney;
 use Zoumi\FacEssential\command\money\SetMoney;
 use Zoumi\FacEssential\command\money\TakeMoney;
 use Zoumi\FacEssential\command\money\TopMoney;
+use Zoumi\FacEssential\command\rank\AddPerm;
+use Zoumi\FacEssential\command\rank\CreateRank;
+use Zoumi\FacEssential\command\rank\ListRank;
+use Zoumi\FacEssential\command\rank\RemovePerm;
+use Zoumi\FacEssential\command\rank\RemoveRank;
+use Zoumi\FacEssential\command\rank\SetDefault;
+use Zoumi\FacEssential\command\rank\SetFormat;
+use Zoumi\FacEssential\command\rank\SetRank;
 use Zoumi\FacEssential\command\teleport\TPA;
 use Zoumi\FacEssential\command\teleport\TPAccept;
 use Zoumi\FacEssential\command\teleport\TPAHere;
@@ -31,16 +39,21 @@ class Main extends PluginBase implements Listener {
 
     /* ARRAY */
     /** @var array $combatLogger */
-    public array $combatLogger = [];
+    public $combatLogger = [];
     /** @var array $teleport */
-    public array $teleport = [];
+    public $teleport = [];
     /** @var array $immune */
-    public array $immune = [];
+    public $immune = [];
     /** @var array $scoreboard */
-    public array $scoreboard = [];
+    public $scoreboard = [];
+    /** @var array $dataPlayers */
+    public $dataPlayers = [];
 
     /* CONFIG */
+    /** @var Config $manager */
     public Config $manager;
+    /** @var Config  */
+    public Config $rank;
 
     /* SQL */
     public \SQLite3 $database;
@@ -56,6 +69,7 @@ class Main extends PluginBase implements Listener {
 
         /* CONFIG */
         $this->manager = new Config($this->getDataFolder() . "manager.yml", Config::YAML);
+        $this->rank = new Config($this->getDataFolder() . "rank.yml", Config::YAML);
 
         /* Commande */
         if (Main::getInstance()->manager->get("enable-money")){
@@ -75,6 +89,16 @@ class Main extends PluginBase implements Listener {
             new TPAccept("tpaccept", "Allows you to accept a teleportation request.", "/tpaccept", []),
             new TPDeny("tpdeny", "Allows you to refuse a teleportation request.", "/tpdeny", []),
 
+            /* RANK */
+            new CreateRank("createrank", "Allows you to create a rank.", "/createrank", []),
+            new RemoveRank("removerank", "Allows you to delete a rank.", "/removerank", []),
+            new SetRank("setrank", "Allows you to set the rank of a player.", "/setrank", []),
+            new ListRank("listrank", "Allows you to see the list of available ranks.", "/listrank", []),
+            new AddPerm("addperm", "Allows you to add a permission to a rank.", "/addperm", []),
+            new RemovePerm("removeperm", "Allows you to withdraw permission from a rank.","/removerank", []),
+            new SetFormat("setformat", "Allows you to define the format of a rank", "/setformat", []),
+            new SetDefault("setdefault", "Allows you to set the default rank.", "/setdefault", []),
+
             /* BASIC */
             new Feed("feed", "Allows you to feed a player or yourself.", "/feed", []),
             new Heal("heal", "Allows you to heal a player or yourself.", "/heal", []),
@@ -90,9 +114,10 @@ class Main extends PluginBase implements Listener {
         /* Task */
 
         /* SQL */
-        $this->database = new \SQLite3($this->getDataFolder() . "Money.db");
+        $this->database = new \SQLite3($this->getDataFolder() . "DataBase.db");
         $this->database->query("CREATE TABLE IF NOT EXISTS money (pseudo VARCHAR(55) PRIMARY KEY, money INT)");
         $this->database->query("CREATE TABLE IF NOT EXISTS home (id INT INCREMENT PRIMARY KEY, pseudo VARCHAR(55), home VARCHAR(15), x FLOAT, y INT, z FLOAT)");
+        $this->database->query("CREATE TABLE IF NOT EXISTS rank (pseudo VARCHAR(55), rank VARCHAR(55))");
 
         /* SETUP */
         $this->setupFile();
@@ -122,6 +147,9 @@ class Main extends PluginBase implements Listener {
     public function setupFile(): void{
         if (!file_exists($this->getDataFolder() . "manager.yml")){
             $this->saveResource("manager.yml", true);
+        }
+        if (!file_exists($this->getDataFolder() . "rank.yml")){
+            $this->saveResource("rank.yml", true);
         }
     }
 

@@ -1,6 +1,7 @@
 FacEssential
 ============
 ------------
+![Image FacEssential](./icon.png)
 * **FacEssential** is a Core for **PMMP**, it gathers all kind of plugins needed to create a faction server. It was created from scratch by **Clouds#0667**.
 
 Available commands 
@@ -91,25 +92,17 @@ Configuration file
 ------------------
 * All additions to the configuration file.
 ```yaml
-# Scoreboard
-scoreboard:
-  # Do you want to activate the scoreboard?
-  enable: false
-  # Insert the title of the score board here.
-  title: "§f(§bFE§f)"
-  lines:
-  # Put your line here
-    - "test"                                    # You can use {player} = name of player, {faction} = faction by FactionsPro, {money} = money of this plugin and {rank} = rank by PureChat. 
 ```
 ----------------
 Support
 =======
 -------
-If you have any **ideas** for additions or a **bug** to report, please join the server discord by clicking [here](https://discord.gg/kARpD3DsdU).
+* If you have any **ideas** for additions or a **bug** to report, please join the server discord by clicking [here](https://discord.gg/kARpD3DsdU).
+* To support me financially click [here](https://paypal.me/ZoumiDev)
 
 ------
 Credit
 ======
-* Thanks to AyzrixYT for the Craft order and to the people who suggested ideas!
+* Thanks to Ayzrix for the Craft order and to the people who suggested ideas!
 
 

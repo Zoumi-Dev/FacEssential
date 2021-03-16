@@ -23,7 +23,7 @@ class ScoreboardTask extends Task {
             $line_actus = 0;
             foreach ($config->get("scoreboard")["lines"] as $line){
                 Main::getInstance()->scoreboard[$this->player->getName()]
-                ->setLine($line_actus, str_replace(["{money}"], [Money::getMoney($this->player->getName())], $line))->set();
+                ->setLine($line_actus, str_replace(["{money}", "{rank}"], [Money::getMoney($this->player->getName()), Main::getInstance()->dataPlayers[$this->player->getName()]["rank"]], $line))->set();
                 $line_actus++;
             }
         }else{
