@@ -75,7 +75,7 @@ class Main extends PluginBase implements Listener {
         if (Main::getInstance()->manager->get("enable-money")){
             $this->getServer()->getCommandMap()->registerAll("FacEssential-Money", [
                 new Money("money", "Allows you to see your money or a player's money.", "/money", []),
-                new TakeMoney("takemoney", "Allows you to send money to a player.", "/takemoney", []),
+                new TakeMoney("takemoney", "Allows you to send money to a player.", "/takemoney", ["pay","sendmoney"]),
                 new AddMoney("addmoney", "Allows you to add money to a player.", "/addmoney", []),
                 new RemoveMoney("removemoney", "Allows you to withdraw money from a player.", "/removemoney", []),
                 new TopMoney("topmoney", "Allows you to see the top 10 players with the most money.", "/topmoney", []),
