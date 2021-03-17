@@ -3,6 +3,8 @@ api: 3.0.0
 version: 1.0.7-BETA
 main: Zoumi\FacEssential\Main
 author: Zoumi
+softdepend:
+  - SimpleFaction
 description: "FacEssential is a Core for PMMP, it gathers all kind of plugins needed to create a faction server. It was created from scratch by Clouds#0667."
 
 permissions:

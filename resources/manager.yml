@@ -50,4 +50,9 @@ scoreboard:
   title: "§f(§bFE§f)"
   lines:
     # Put your line here
-    - "§3By §bZoumi"                                    # You can use {player} = name of player, {faction} = faction by FactionsPro, {money} = money of this plugin and {rank} = rank by PureChat.
+    - "§3By §bZoumi"                                    # You can use {money} = money of this plugin, {rank} = rank of this plugin. If faction-system = true : {faction_name} = Faction name, {faction_rank} Faction rank, {faction_power} Faction power, {faction_bank} Faction bank (SimpleFaction)
+
+# FACTION
+
+# Do you want to activate the faction support ? (SimpleFaction)
+faction-system: false

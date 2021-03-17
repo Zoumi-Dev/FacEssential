@@ -2,6 +2,7 @@
 
 namespace Zoumi\FacEssential\listener;
 
+use Ayzrix\SimpleFaction\API\FactionsAPI;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
@@ -62,10 +63,30 @@ class PlayerListener implements Listener {
                 $scoreboard = Main::getInstance()->scoreboard[$player->getName()] = new Scoreboard($player);
                 $config = Main::getInstance()->manager;
                 $line_actus = 0;
-                foreach ($config->get("scoreboard")["lines"] as $line) {
-                    $scoreboard
-                        ->setLine($line_actus, str_replace(["{money}", "{rank}"], [Money::getMoney($player->getName()), Main::getInstance()->dataPlayers[$player->getName()]["rank"]], $line))->set();
-                    $line_actus++;
+                if (Main::getInstance()->manager->get("faction-system") === true) {
+                    if (FactionsAPI::isInFaction($player)) {
+                        $faction = FactionsAPI::getFaction($player);
+                        $factionRank = FactionsAPI::getRank($player->getName());
+                        $factionPower = FactionsAPI::getPower($faction);
+                        $factionBank = FactionsAPI::getMoney($faction);
+                    } else {
+                        $faction = "...";
+                        $factionRank = "...";
+                        $factionPower = "...";
+                        $factionBank = "...";
+                    }
+
+                    foreach ($config->get("scoreboard")["lines"] as $line) {
+                        $scoreboard
+                            ->setLine($line_actus, str_replace(["{money}", "{rank}", "{faction_name}", "{faction_rank}", "{faction_power}", "{faction_bank}"], [Money::getMoney($player->getName()), Main::getInstance()->dataPlayers[$player->getName()]["rank"], $faction, $factionRank, $factionPower, $factionBank], $line))->set();
+                        $line_actus++;
+                    }
+                } else {
+                    foreach ($config->get("scoreboard")["lines"] as $line) {
+                        $scoreboard
+                            ->setLine($line_actus, str_replace(["{money}", "{rank}"], [Money::getMoney($player->getName()), Main::getInstance()->dataPlayers[$player->getName()]["rank"]], $line))->set();
+                        $line_actus++;
+                    }
                 }
                 Main::getInstance()->getScheduler()->scheduleRepeatingTask(new ScoreboardTask($player), $config->get("scoreboard")["update-tick"]);
             }
@@ -99,7 +120,20 @@ class PlayerListener implements Listener {
     public function onChat(PlayerChatEvent $event){
         $player = $event->getPlayer();
         if (!Main::getInstance()->dataPlayers[$player->getName()]["rank"] !== "none"){
-            $event->setFormat(str_replace(["{rank}", "{name}", "{displayName}", "{msg}"], [Main::getInstance()->dataPlayers[$player->getName()]["rank"], $player->getName(), $player->getDisplayName(), $event->getMessage()], Chat::getFormat(Main::getInstance()->dataPlayers[$player->getName()]["rank"])));
+            if (Main::getInstance()->manager->get("faction-system") === true) {
+                if (FactionsAPI::isInFaction($player)) {
+                    $faction = FactionsAPI::getFaction($player);
+                    $factionRank = FactionsAPI::getRank($player->getName());
+                    $factionPower = FactionsAPI::getPower($faction);
+                    $factionBank = FactionsAPI::getMoney($faction);
+                } else {
+                    $faction = "...";
+                    $factionRank = "...";
+                    $factionPower = "...";
+                    $factionBank = "...";
+                }
+                $event->setFormat(str_replace(["{rank}", "{name}", "{displayName}", "{msg}", "{faction_name}", "{faction_rank}", "{faction_power}", "{faction_bank}"], [Main::getInstance()->dataPlayers[$player->getName()]["rank"], $player->getName(), $player->getDisplayName(), $event->getMessage(), $faction, $factionRank, $factionPower, $factionBank], Chat::getFormat(Main::getInstance()->dataPlayers[$player->getName()]["rank"])));
+            } else $event->setFormat(str_replace(["{rank}", "{name}", "{displayName}", "{msg}"], [Main::getInstance()->dataPlayers[$player->getName()]["rank"], $player->getName(), $player->getDisplayName(), $event->getMessage()], Chat::getFormat(Main::getInstance()->dataPlayers[$player->getName()]["rank"])));
         }
     }
 
