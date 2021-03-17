@@ -67,9 +67,14 @@ class Main extends PluginBase implements Listener {
         $this->getLogger()->info("is enable.");
         self::$instance = $this;
 
+        /* SETUP */
+        $this->setupFile();
+
         /* CONFIG */
         $this->manager = new Config($this->getDataFolder() . "manager.yml", Config::YAML);
         $this->rank = new Config($this->getDataFolder() . "rank.yml", Config::YAML);
+
+        $this->unloadCommand();
 
         /* Commande */
         if (Main::getInstance()->manager->get("enable-money")){
@@ -103,7 +108,7 @@ class Main extends PluginBase implements Listener {
             new Feed("feed", "Allows you to feed a player or yourself.", "/feed", []),
             new Heal("heal", "Allows you to heal a player or yourself.", "/heal", []),
             new Craft("craft", "Allows you to open a crafting table.", "/craft", []),
-            new EnderChest("enderchest", "Allows you to open an enderchest.", "/enderchest", ["ec"]),
+            new EnderChest("enderchest", "Allows you to open an ender chest.", "/enderchest", ["ec"]),
             new Top("top", "Allows you to teleport to the surface.", "/top", ["surface"])
         ]);
 
@@ -118,10 +123,6 @@ class Main extends PluginBase implements Listener {
         $this->database->query("CREATE TABLE IF NOT EXISTS money (pseudo VARCHAR(55) PRIMARY KEY, money INT)");
         $this->database->query("CREATE TABLE IF NOT EXISTS home (id INT INCREMENT PRIMARY KEY, pseudo VARCHAR(55), home VARCHAR(15), x FLOAT, y INT, z FLOAT)");
         $this->database->query("CREATE TABLE IF NOT EXISTS rank (pseudo VARCHAR(55), rank VARCHAR(55))");
-
-        /* SETUP */
-        $this->setupFile();
-        $this->unloadCommand();
     }
 
     public function convert($time){
@@ -146,10 +147,10 @@ class Main extends PluginBase implements Listener {
 
     public function setupFile(): void{
         if (!file_exists($this->getDataFolder() . "manager.yml")){
-            $this->saveResource("manager.yml", true);
+            $this->saveResource("manager.yml");
         }
         if (!file_exists($this->getDataFolder() . "rank.yml")){
-            $this->saveResource("rank.yml", true);
+            $this->saveResource("rank.yml");
         }
     }
 
@@ -166,7 +167,7 @@ class Main extends PluginBase implements Listener {
             try {
                 if ($map->getCommand($command)) {
                     $map->unregister($map->getCommand($command));
-                    Main::getInstance()->getLogger()->info("The §4" . $command . " §fcommand has been unload");
+                    Main::getInstance()->getLogger()->info("The §4" . $command . " §fcommand has been unload.");
                 } else {
                     throw new CommandErrorException("Command $command not found.");
                 }

@@ -13,6 +13,7 @@ class Chat {
     {
         $config = Main::getInstance()->rank;
         $config->set($rankname, [
+            "name" => $rankname,
             "permissions" => [],
             "format" => "§7$rankname §2{name} §7- {msg}",
             "default" => false
@@ -70,6 +71,7 @@ class Chat {
         $perm_actus = $config->get($rank)["permissions"];
         $perm_actus[] = $permission;
         $config->set($rank, [
+            "name" => $rank,
             "permissions" => $perm_actus,
             "format" => $config->get($rank)["format"],
             "default" => $config->get($rank)["default"]
@@ -92,7 +94,7 @@ class Chat {
         $config = Main::getInstance()->rank;
         foreach ($config->getAll() as $rank){
             if ($rank["default"] === true){
-                return $rank;
+                return $rank["name"];
             }
         }
         return "none";
@@ -138,6 +140,7 @@ class Chat {
     public static function setFormat(string $rank, string $format){
         $config = Main::getInstance()->rank;
         $config->set($rank, [
+            "name" => $rank,
             "permissions" => $config->get($rank)["permissions"],
             "format" => $format,
             "default" => $config->get($rank)["default"]
@@ -149,12 +152,14 @@ class Chat {
         $config = Main::getInstance()->rank;
         if (Chat::getDefaultRank() !== "none"){
             $config->set(Chat::getDefaultRank(), [
+                "name" => Chat::getDefaultRank(),
                 "permissions" => $config->get(Chat::getDefaultRank())["permissions"],
                 "format" => $config->get(Chat::getDefaultRank())["format"],
                 "default" => false
             ]);
         }else {
             $config->set($rank, [
+                "name" => $rank,
                 "permissions" => $config->get($rank)["permissions"],
                 "format" => $config->get($rank)["format"],
                 "default" => true

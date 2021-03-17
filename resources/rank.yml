@@ -1,5 +1,7 @@
 # Name of Rank
 players:
+  # Name of rank
+  name: players
   # all permission of rank
   permissions:
     # - "use.feed" (exemple)
