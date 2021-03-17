@@ -67,9 +67,14 @@ class Main extends PluginBase implements Listener {
         $this->getLogger()->info("is enable.");
         self::$instance = $this;
 
+        /* SETUP */
+        $this->setupFile();
+
         /* CONFIG */
         $this->manager = new Config($this->getDataFolder() . "manager.yml", Config::YAML);
         $this->rank = new Config($this->getDataFolder() . "rank.yml", Config::YAML);
+
+        $this->unloadCommand();
 
         /* Commande */
         if (Main::getInstance()->manager->get("enable-money")){
@@ -118,10 +123,6 @@ class Main extends PluginBase implements Listener {
         $this->database->query("CREATE TABLE IF NOT EXISTS money (pseudo VARCHAR(55) PRIMARY KEY, money INT)");
         $this->database->query("CREATE TABLE IF NOT EXISTS home (id INT INCREMENT PRIMARY KEY, pseudo VARCHAR(55), home VARCHAR(15), x FLOAT, y INT, z FLOAT)");
         $this->database->query("CREATE TABLE IF NOT EXISTS rank (pseudo VARCHAR(55), rank VARCHAR(55))");
-
-        /* SETUP */
-        $this->setupFile();
-        $this->unloadCommand();
 
         /* SUPPORT */
         if ($this->manager->get("faction-system") === true) {
