@@ -122,6 +122,18 @@ class Main extends PluginBase implements Listener {
         /* SETUP */
         $this->setupFile();
         $this->unloadCommand();
+
+        /* SUPPORT */
+        if ($this->manager->get("faction-system") === true) {
+            $faction = $this->getServer()->getPluginManager()->getPlugin("SimpleFaction");
+            if ($faction !== null) {
+                $version = $faction->getDescription()->getVersion();
+                $this->getLogger()->notice("Simple faction V" . $version . " successfully loaded !");
+            } else {
+                $this->getLogger()->notice("§cNo valid version of SimpleFaction found ! Please download a valid version or disable the faction support !");
+                $this->getServer()->getPluginManager()->disablePlugin($this);
+            }
+        }
     }
 
     public function convert($time){

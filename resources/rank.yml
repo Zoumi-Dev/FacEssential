@@ -4,6 +4,7 @@ players:
   permissions:
     # - "use.feed" (exemple)
   # Format of the rank in the chat, {msg} = message, {rank} = name of rank, {displayName} = Display Name, {name} = Name of player (Does not support FactionsPro as we will make our own faction system.)
+  # If faction-system is on true -> {faction_name} = Faction name, {faction_rank} = Faction rank, {faction_power} = Faction power, {faction_bank} = Faction bank
   format: "§7Players §2{name} §7- {msg}"
   # Do you want this role to be assigned directly to the player when they first log in?
   default: true
