@@ -19,11 +19,11 @@ class TPDeny extends Command {
     {
         if ($sender instanceof Player){
             if (!!isset(Main::getInstance()->teleport[$sender->getName()]) or time() >= Main::getInstance()->teleport[$sender->getName()]["timeLeft"]){
-                $sender->sendMessage(Manager::PREFIX . "You have no request for teleportation.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-have-resuest"));
                 return;
             }else {
                 unset(Main::getInstance()->teleport[$sender->getName()]);
-                $sender->sendMessage(Manager::PREFIX . "You did refuse the teleportation request.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("succes-deny-request"));
                 return;
             }
         }

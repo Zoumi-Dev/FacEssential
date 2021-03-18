@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use Zoumi\FacEssential\api\Chat;
 use Zoumi\FacEssential\FEPlayer;
+use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class AddPerm extends Command {
@@ -20,18 +21,18 @@ class AddPerm extends Command {
         if ($sender instanceof FEPlayer){
             if ($sender->hasPermission("use.add.perm")){
                 if (!isset($args[1])){
-                    $sender->sendMessage(Manager::PREFIX . "Please do /addperm [name of rank] [permission].");
+                    $sender->sendMessage(Manager::PREFIX . str_replace("{command}", "/addperm [rank] [permission]", Main::getInstance()->lang->get("please-do")));
                     return;
                 }else{
                     if (!Chat::existsRank($args[0])){
-                        $sender->sendMessage(Manager::PREFIX . "This rank does not exist.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("rank-not-exist"));
                         return;
                     }
                     Chat::addPermission($args[0], $args[1]);
-                    $sender->sendMessage(Manager::PREFIX . "You have added the §e" . $args[1] . " §fpermission on the §e" . $args[0] . " §frank.");
+                    $sender->sendMessage(Manager::PREFIX . str_replace(["{rank}", "{permission}"], [$args[0], $args[1]], Main::getInstance()->lang->get("succes-add-perm")));
                 }
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

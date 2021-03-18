@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\Server;
+use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class AddMoney extends Command {
@@ -20,33 +21,33 @@ class AddMoney extends Command {
         if ($sender instanceof Player){
             if ($sender->hasPermission("use.add.money")){
                 if (!isset($args[1])){
-                    $sender->sendMessage(Manager::PREFIX . "Please do /addmoney [player] [money].");
+                    $sender->sendMessage(Manager::PREFIX . str_replace("{command}", "/addtoken [player] [money]", Main::getInstance()->lang->get("please-do")));
                     return;
                 }else{
                     if (\Zoumi\FacEssential\api\Money::haveAccount($args[0])){
                         if (!is_float($args[1]) or !is_int($args[1])){
-                            $sender->sendMessage(Manager::PREFIX . "The money argument must be a whole number or decimal.");
+                            $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-number-or-decimal"));
                             return;
                         }
                         if ($args[1] > 0){
                             \Zoumi\FacEssential\api\Money::addMoney($args[0], $args[1]);
-                            $sender->sendMessage(Manager::PREFIX . "You just added §e" . $args[1] . " §fof money to the player §e" . $args[0] . "§f.");
+                            $sender->sendMessage(Manager::PREFIX . str_replace(["{money}", "{player}"], [$args[1], $args[0]], Main::getInstance()->lang->get("money-send")));
                             $target = Server::getInstance()->getPlayer($args[0]);
                             if ($target instanceof Player){
-                                $sender->sendMessage(Manager::PREFIX . "Player " . $sender->getName() . " §fadded §e" . $args[1] . " §fof money.");
+                                $sender->sendMessage(Manager::PREFIX . str_replace(["{player}", "{money}"], [$sender->getName(), $args[1]], Main::getInstance()->lang->get("money-receive")));
                             }
                             return;
                         }else{
-                            $sender->sendMessage(Manager::PREFIX . "The money argument must be greater than 0.");
+                            $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-zero"));
                             return;
                         }
                     }else{
-                        $sender->sendMessage(Manager::PREFIX . "This player is not in the database.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-in-database"));
                         return;
                     }
                 }
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

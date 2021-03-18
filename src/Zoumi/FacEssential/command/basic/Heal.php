@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\Server;
+use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class Heal extends Command {
@@ -21,30 +22,30 @@ class Heal extends Command {
             if ($sender->hasPermission("use.feed")) {
                 if (!isset($args[0])) {
                     if ($sender->getHealth() >= 20) {
-                        $sender->sendMessage(Manager::PREFIX . "Your heal bar is already full.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("full-heal"));
                         return;
                     }
                     $sender->setHealth($sender->getMaxHealth());
-                    $sender->sendMessage(Manager::PREFIX . "Your heal bar is now full.");
+                    $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("now-full-heal"));
                     return;
                 }else{
                     $target = Server::getInstance()->getPlayer($args[0]);
                     if ($target instanceof Player){
                         if ($target->getHealth() >= 20){
-                            $sender->sendMessage(Manager::PREFIX . "His heal bar is already full.");
+                            $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("player-full-heal"));
                             return;
                         }
                         $target->setHealth($sender->getMaxHealth());
-                        $sender->sendMessage(Manager::PREFIX . "His food bar is now full.");
-                        $target->sendMessage(Manager::PREFIX . "§e" . $sender->getName() . " §fhas fed you.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("player-now-full-heal"));
+                        $target->sendMessage(Manager::PREFIX . str_replace("{player}", $sender->getName(), Main::getInstance()->lang->get("player-heal-you")));
                         return;
                     }else{
-                        $sender->sendMessage(Manager::PREFIX . "This player is not online.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("player-not-online"));
                         return;
                     }
                 }
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use Zoumi\FacEssential\api\Chat;
 use Zoumi\FacEssential\FEPlayer;
+use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class CreateRank extends Command {
@@ -20,22 +21,22 @@ class CreateRank extends Command {
         if ($sender instanceof FEPlayer) {
             if ($sender->hasPermission("use.create.rank")) {
                 if (!isset($args[0])) {
-                    $sender->sendMessage(Manager::PREFIX . "Please do /createrank [name of rank].");
+                    $sender->sendMessage(Manager::PREFIX . str_replace("{command}", "/createrank [name of rank]", Main::getInstance()->lang->get("please-do")));
                     return;
                 } else {
                     if (strlen($args[0]) > 15) {
-                        $sender->sendMessage(Manager::PREFIX . "The rank argument is too long! Maximum 15 characters.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("rank-name-lenght"));
                         return;
                     }
                     if (Chat::existsRank($args[0])) {
-                        $sender->sendMessage(Manager::PREFIX . "This rank already exists.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("rank-already-exist"));
                         return;
                     }
                     Chat::createRank($args[0]);
-                    $sender->sendMessage(Manager::PREFIX . "The §e" . $args[0] . " §frank has been successfully created, to add a format do /setformat to add a permission do /setperm.");
+                    $sender->sendMessage(Manager::PREFIX . str_replace("{rank}", $args[0], Main::getInstance()->lang->get("succes-create-rank")));
                 }
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

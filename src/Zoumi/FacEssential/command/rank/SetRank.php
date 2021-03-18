@@ -22,13 +22,13 @@ class SetRank extends Command {
         if ($sender instanceof FEPlayer){
             if ($sender->hasPermission("use.set.rank")){
                 if (!isset($args[1])){
-                    $sender->sendMessage(Manager::PREFIX . "Please do /setrank [player] [rank].");
+                    $sender->sendMessage(Manager::PREFIX . str_replace("{command}", "/setrank [player] [rank]", Main::getInstance()->lang->get("please-do")));
                     return;
                 }else{
                     $target = Server::getInstance()->getPlayer($args[0]);
                     if ($target instanceof FEPlayer){
                         if (!Chat::existsRank($args[1])){
-                            $sender->sendMessage(Manager::PREFIX . "This rank does not exist, please do /listrank to see the list of available ranks");
+                            $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("rank-not-exist"));
                             return;
                         }
                         Chat::setRankOfPlayer($target, $args[1]);
@@ -37,15 +37,15 @@ class SetRank extends Command {
                         }
                         Main::getInstance()->dataPlayers[$target->getName()]["rank"] = $args[1];
                         $target->addPerms(Main::getInstance()->rank->get($args[1])["permissions"]);
-                        $sender->sendMessage(Manager::PREFIX . "The player §e" . $target->getName() . " §fnow has the §e" . $args[1] . " §frank.");
-                        $target->sendMessage(Manager::PREFIX . "§e" . $sender->getName() . " §fhas set your rank to §e" . $args[1] . "§f.");
+                        $sender->sendMessage(Manager::PREFIX . str_replace(["{rank}", "{player}"], [$args[1], $target->getName()], Main::getInstance()->lang->get("succes-set-rank")));
+                        $target->sendMessage(Manager::PREFIX . str_replace(["{player}", "{rank}"], [$sender->getName(), $args[1]], Main::getInstance()->lang->get("player-succes-set-rank")));
                     }else{
-                        $sender->sendMessage(Manager::PREFIX . "This player is not online.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("player-not-exist"));
                         return;
                     }
                 }
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

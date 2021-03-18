@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use Zoumi\FacEssential\api\Chat;
 use Zoumi\FacEssential\FEPlayer;
+use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class SetDefault extends Command {
@@ -20,28 +21,28 @@ class SetDefault extends Command {
         if ($sender instanceof FEPlayer){
             if ($sender->hasPermission("use.set.default")){
                 if (!isset($args[0])){
-                    $sender->sendMessage(Manager::PREFIX . "Please do /setdefault [name of rank].");
+                    $sender->sendMessage(Manager::PREFIX . str_replace("{command}", "/setdefault [rank]", Main::getInstance()->lang->get("please-do")));
                     return;
                 }
                 if (!Chat::existsRank($args[0])){
-                    $sender->sendMessage(Manager::PREFIX . "This rank does not exist.");
+                    $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("rank-not-exist"));
                     return;
                 }
                 if (Chat::getDefaultRank() !== "none"){
                     if ($args[0] === Chat::getDefaultRank()){
                         Chat::setDefault($args[0]);
-                        $sender->sendMessage(Manager::PREFIX . "You have removed the default §e" . $args[0] . " §frank.");
+                        $sender->sendMessage(Manager::PREFIX . str_replace("{rank}", $args[0], Main::getInstance()->lang->get("succes-remove-default")));
                         return;
                     }else{
-                        $sender->sendMessage(Manager::PREFIX . "A rank is already in default do /setdefault [default rank] to remove it.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("already-rank-default"));
                         return;
                     }
                 }
                 Chat::setDefault($args[0]);
-                $sender->sendMessage(Manager::PREFIX . "The §e" . $args[0] . " §frank is now set as default.");
+                $sender->sendMessage(Manager::PREFIX . str_replace("{rank}", $args[0], Main::getInstance()->lang->get("succed-set-default")));
                 return;
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

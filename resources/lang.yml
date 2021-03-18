@@ -1,0 +1,68 @@
+not-perm: §cYou do not have permission to use this command.
+not-in-database: §cThis player is not in the database.
+player-not-online: §cThis player is not online.
+please-do: Please do {command}.
+
+# Feed
+full-food: Your food bar is already full.
+player-full-food: His food bar is already full.
+now-full-food: Your food bar is now full.
+player-now-full-food: His food bar is now full.
+player-feed-you: §e{player} §fhas fed you.
+
+# Heal
+full-heal: Your heal bar is already full.
+player-full-heal: His heal bar is already full.
+now-full-heal: Your heal bar is now full.
+player-now-full-heal: His heal bar is now full.
+player-heal-you: §e{player} §fhas heal you.
+
+# Surface
+surface-succeded: You have been teleported to the surface.
+# Money
+not-zero: The money argument must be greater than 0.
+not-zero-or-player-dosent-have-money: The money argument must be greater than 0 or the player does not have the money requested.
+not-number-or-decimal: The money argument must be a whole number or decimal.
+money-send: You just added §e{money} §fof money to the player §e{player}§f.
+money-receive: Player §e{player} §fadded §e{money} §fof money.
+money-remove-send: You just removed §e{money} §fof money to the player §e{player}§f.
+money-remove-receive: Player §e{player} §fremoved §e{money} §fof money.
+money-set: You have defined the money of the player §e{player} §fat §e{money}§f.
+money-set-receive: The player §e{player} §fhas put your money at §e{money}§f.
+current-money: You have §e{money} §fof money.
+player-have-money: The player §e{player} §fhas §e{money} §fmoney.
+yourself-money: You can't send money to yourself.
+not-have-money: You do not own the money.
+
+# Rank
+rank-not-exist: This rank does not exist.
+rank-already-exist: This rank already exists.
+rank-name-lenght: The rank argument is too long! Maximum 15 characters.
+succes-add-perm: You have added the §e{permission} §fpermission on the §e{rank} §frank.
+succes-create-rank: The §e{rank} §frank has been successfully created, to add a format do §e/setformat §fto add a permission do §e/setperm§f.
+list-rank: "Here is the list of available ranks:"
+none: §eNone§f.
+permission-not-exist: This permission does not exist on this rank.
+succes-remove-perm: You have removed the §e{permission} §fpermission on the §e{rank} §frank.
+succes-remove-rank: The rank §e{rank} §fhas been removed.
+succed-set-default: The §e{rank} §frank is now set as default.
+succes-remove-default: You have removed the default §e{rank} §frank.
+already-rank-default: A rank is already in default do /setdefault [default rank] to remove it.
+succes-set-format: The format of the §e{rank} §frank is now {format}§f.
+succes-set-rank: The player §e{player} §fnow has the §e{rank} §frank.
+player-succes-set-rank: §e{player} §fhas set your rank to §e{rank}§f.
+
+# Teleport
+succes-request-sent: Teleportation request sent.
+tpa-message: §e{player} §fwants to teleport to you.\nDo §e/tpaccept §fto accept or §e/tpdeny §fto refuse.
+tpahere-message: §e{player} §fwants you to teleport to it.\nDo §e/tpaccept §fto accept or §e/tpdeny §fto refuse.
+not-have-resuest: You have no request for teleportation.
+accept-request: §e{player} §fhas accepted your request for teleportation.
+teleport-to-you: Teleportation accepted! §e{player} §fhas just been teleported to you..
+teleport-to-here: Teleportation accepted! You have been teleported to §e{player}§f.
+succes-deny-request: You did refuse the teleportation request.
+
+# CombatLogger
+is-immune: §4You cannot attack when you are immune.
+no-disconnect: §4You are now in combat, do not disconnect or you will be killed.
+time-remaining: "Time remaining: §e{time}"

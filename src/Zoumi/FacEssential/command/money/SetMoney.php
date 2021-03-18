@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\Server;
+use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class SetMoney extends Command {
@@ -20,28 +21,28 @@ class SetMoney extends Command {
         if ($sender instanceof Player){
             if ($sender->hasPermission("use.set.money")){
                 if (!isset($args[1])){
-                    $sender->sendMessage(Manager::PREFIX . "Please do /setmoney [player] [money].");
+                    $sender->sendMessage(Manager::PREFIX . str_replace("{command}", "/setmoney [player] [money]", Main::getInstance()->lang->get("please-do")));
                     return;
                 }else{
                     if (\Zoumi\FacEssential\api\Money::haveAccount($args[0])){
                         if ($args[1] >= 0){
                             \Zoumi\FacEssential\api\Money::setMoney($args[0], $args[1]);
-                            $sender->sendMessage(Manager::PREFIX . "You have defined the money of the player §e" . $args[0] . " §fat §e" . $args[1] . "§f.");
+                            $sender->sendMessage(Manager::PREFIX . str_replace(["{player}", "{money}"], [$args[0], $args[1]], Main::getInstance()->lang->get("money-set")));
                             $target = Server::getInstance()->getPlayer($args[0]);
                             if ($target instanceof Player){
-                                $target->sendMessage(Manager::PREFIX . "The player §e" . $sender->getName() . " §fhas put your money at §e" . $args[1] . "§f.");
+                                $target->sendMessage(Manager::PREFIX . str_replace(["{player}", "{money}"], [$sender->getName(), $args[1]], Main::getInstance()->lang->get("money-set")));
                             }
                         }else{
-                            $sender->sendMessage(Manager::PREFIX . "The money argument must be greater than or equal to 0.");
+                            $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-number-or-decimal"));
                             return;
                         }
                     }else{
-                        $sender->sendMessage(Manager::PREFIX . "This player is not in the database.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-in-database"));
                         return;
                     }
                 }
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

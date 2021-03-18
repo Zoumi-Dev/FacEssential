@@ -12,6 +12,7 @@ use pocketmine\inventory\CraftingGrid;
 use pocketmine\network\mcpe\protocol\ContainerOpenPacket;
 use pocketmine\network\mcpe\protocol\types\WindowTypes;
 use pocketmine\Player;
+use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class Craft extends Command {
@@ -39,7 +40,7 @@ class Craft extends Command {
                     return;
                 }
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

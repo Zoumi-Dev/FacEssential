@@ -52,8 +52,10 @@ class Main extends PluginBase implements Listener {
     /* CONFIG */
     /** @var Config $manager */
     public Config $manager;
-    /** @var Config  */
+    /** @var Config $rank*/
     public Config $rank;
+    /** @var Config $lang*/
+    public Config $lang;
 
     /* SQL */
     public \SQLite3 $database;
@@ -73,6 +75,7 @@ class Main extends PluginBase implements Listener {
         /* CONFIG */
         $this->manager = new Config($this->getDataFolder() . "manager.yml", Config::YAML);
         $this->rank = new Config($this->getDataFolder() . "rank.yml", Config::YAML);
+        $this->lang = new Config($this->getDataFolder() . "lang.yml", Config::YAML);
 
         $this->unloadCommand();
 
@@ -159,10 +162,13 @@ class Main extends PluginBase implements Listener {
 
     public function setupFile(): void{
         if (!file_exists($this->getDataFolder() . "manager.yml")){
-            $this->saveResource("manager.yml", true);
+            $this->saveResource("manager.yml");
         }
         if (!file_exists($this->getDataFolder() . "rank.yml")){
-            $this->saveResource("rank.yml", true);
+            $this->saveResource("rank.yml");
+        }
+        if (!file_exists($this->getDataFolder() . "lang.yml")){
+            $this->saveResource("lang.yml");
         }
     }
 

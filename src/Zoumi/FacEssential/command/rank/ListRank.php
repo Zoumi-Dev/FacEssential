@@ -25,15 +25,15 @@ class ListRank extends Command {
                     $ranks[] = $rank;
                 }
                 if (empty($ranks)) {
-                    $sender->sendMessage(Manager::PREFIX . "Here is the list of available ranks:");
-                    $sender->sendMessage("§eNone§f.");
+                    $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("list-rank"));
+                    $sender->sendMessage(Main::getInstance()->lang->get("none"));
                 }else {
-                    $sender->sendMessage(Manager::PREFIX . "Here is the list of available ranks:");
+                    $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("list-rank"));
                     $ranks = implode("§f, §e", $ranks);
                     $sender->sendMessage("§e" . $ranks . "§f.");
                 }
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

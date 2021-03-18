@@ -26,7 +26,7 @@ class CombatLogger extends Task {
             unset(Main::getInstance()->combatLogger[$this->entity->getName()]);
         }
         if (Main::getInstance()->manager->get("combat-logger")["display-cooldown-combat-logger"]){
-            $this->damager->sendPopup("Time remaining: " . Main::getInstance()->convert(Main::getInstance()->combatLogger[$this->damager->getName()] - time()));
+            $this->damager->sendPopup(str_replace("{time}", Main::getInstance()->convert(Main::getInstance()->combatLogger[$this->damager->getName()] - time()), Main::getInstance()->lang->get("time-remaining")));
         }
     }
 

@@ -25,16 +25,16 @@ class RemoveRank extends Command {
                     return;
                 }else{
                     if (!Chat::existsRank($args[0])){
-                        $sender->sendMessage(Manager::PREFIX . "This rank does not exist.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("rank-not-exist"));
                         return;
                     }
                     Chat::removeRank($args[0]);
                     Chat::updateAll($args[0]);
-                    $sender->sendMessage(Manager::PREFIX . "The rank §e" . $args[0] . " §fhas been removed.");
+                    $sender->sendMessage(Manager::PREFIX . str_replace("{rank}", $args[0], Main::getInstance()->lang->get("succes-remove-rank")));
                     return;
                 }
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

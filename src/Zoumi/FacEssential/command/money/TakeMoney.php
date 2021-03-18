@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\Server;
+use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class TakeMoney extends Command {
@@ -19,17 +20,17 @@ class TakeMoney extends Command {
     {
         if ($sender instanceof Player){
             if (!isset($args[1])){
-                $sender->sendMessage(Manager::PREFIX . "Please do /takemoney [player] [money].");
+                $sender->sendMessage(Manager::PREFIX . str_replace("{command}", "/takemoney [player] [money]", Main::getInstance()->lang->get("please-do")));
                 return;
             }else{
                 if (\Zoumi\FacEssential\api\Money::haveAccount($args[0])){
                     if (!is_float($args[1]) or !is_int($args[1])){
-                        $sender->sendMessage(Manager::PREFIX . "The money argument must be a whole number or decimal.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-number-or-decimal"));
                         return;
                     }
                     if (\Zoumi\FacEssential\api\Money::getMoney($sender->getName()) >= $args[1]){
                         if ($args[0] === $sender->getName()){
-                            $sender->sendMessage(Manager::PREFIX . "You can't send money to yourself.");
+                            $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("yourself-money"));
                             return;
                         }
                         \Zoumi\FacEssential\api\Money::removeMoney($sender->getName(), $args[1]);
@@ -41,11 +42,11 @@ class TakeMoney extends Command {
                         }
                         return;
                     }else{
-                        $sender->sendMessage(Manager::PREFIX . "You do not own the money.");
+                        $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-have-money"));
                         return;
                     }
                 }else{
-                    $sender->sendMessage(Manager::PREFIX . "This player is not in the database.");
+                    $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-in-database"));
                     return;
                 }
             }

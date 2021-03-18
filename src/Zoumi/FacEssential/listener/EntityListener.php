@@ -21,7 +21,7 @@ class EntityListener implements Listener
             if (Main::getInstance()->manager->get("teleport")["immune-players"]) {
                 if (isset(Main::getInstance()->immune[$damager->getName()])) {
                     if (time() < Main::getInstance()->immune[$damager->getName()]) {
-                        $damager->sendMessage(Manager::PREFIX . "§4You cannot attack when you are immune.");
+                        $damager->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("is-immune"));
                         if ($event->isCancelled()) return;
                         $event->setCancelled(true);
                         return;
@@ -37,14 +37,14 @@ class EntityListener implements Listener
             }
             if (!isset(Main::getInstance()->combatLogger[$damager->getName()])) {
                 Main::getInstance()->combatLogger[$damager->getName()] = time() + Main::getInstance()->manager->get("cooldown-combat-logger");
-                $damager->sendMessage(Manager::PREFIX . "§4You are now in combat, do not disconnect or you will be killed.");
+                $damager->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("no-disconnect"));
                 Main::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatLogger($damager, $entity), 20);
             } else {
                 Main::getInstance()->combatLogger[$damager->getName()] = time() + Main::getInstance()->manager->get("cooldown-combat-logger");
             }
             if (!isset(Main::getInstance()->combatLogger[$entity->getName()])) {
                 Main::getInstance()->combatLogger[$entity->getName()] = time() + Main::getInstance()->manager->get("cooldown-combat-logger");
-                $entity->sendMessage(Manager::PREFIX . "§4You are now in combat, do not disconnect or you will be killed.");
+                $entity->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("no-disconnect"));
                 Main::getInstance()->getScheduler()->scheduleRepeatingTask(new CombatLogger($entity, $damager), 20);
             } else {
                 Main::getInstance()->combatLogger[$entity->getName()] = time() + Main::getInstance()->manager->get("cooldown-combat-logger");

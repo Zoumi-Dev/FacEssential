@@ -10,6 +10,7 @@ use pocketmine\nbt\tag\IntTag;
 use pocketmine\nbt\tag\StringTag;
 use pocketmine\Player;
 use pocketmine\tile\Tile;
+use Zoumi\FacEssential\Main;
 use Zoumi\FacEssential\Manager;
 
 class EnderChest extends Command {
@@ -35,7 +36,7 @@ class EnderChest extends Command {
                 $sender->addWindow($sender->getEnderChestInventory());
                 return;
             }else{
-                $sender->sendMessage(Manager::PREFIX . "§4You do not have permission to use this command.");
+                $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("not-perm"));
                 return;
             }
         }

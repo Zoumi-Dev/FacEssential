@@ -20,7 +20,7 @@ class TPAHere extends Command {
     {
         if ($sender instanceof Player){
             if (!isset($args[0])){
-                $sender->sendMessage(Manager::PREFIX . "You must do /tpahere [player].");
+                $sender->sendMessage(Manager::PREFIX . str_replace("{command}", "/tpahere [player]", Main::getInstance()->lang->get("please-do")));
                 return;
             }else{
                 $target = Server::getInstance()->getPlayer($args[0]);
@@ -30,11 +30,11 @@ class TPAHere extends Command {
                         "timeLeft" => time() + 30,
                         "isHere" => true
                     ];
-                    $sender->sendMessage(Manager::PREFIX . "Teleportation request sent.");
-                    $target->sendMessage(Manager::PREFIX . "§e" . $sender->getName() . " §fwants you to teleport to it.\nDo §e/tpaccept §fto accept or §e/tpdeny §fto refuse.");
+                    $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("succes-request-sent"));
+                    $target->sendMessage(Manager::PREFIX . str_replace("{player}", $sender->getName(), Main::getInstance()->lang->get("tpahere-message")));
                     return;
                 }else{
-                    $sender->sendMessage(Manager::PREFIX . "Cannot find player.");
+                    $sender->sendMessage(Manager::PREFIX . Main::getInstance()->lang->get("player-not-exist"));
                     return;
                 }
             }
