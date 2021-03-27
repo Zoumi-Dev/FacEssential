@@ -58,7 +58,7 @@ class Main extends PluginBase implements Listener {
     public $lang;
 
     /* SQL */
-    public \SQLite3 $database;
+    public $database;
 
     public static function getInstance(): self{
         return self::$instance;
