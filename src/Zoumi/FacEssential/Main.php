@@ -51,11 +51,11 @@ class Main extends PluginBase implements Listener {
 
     /* CONFIG */
     /** @var Config $manager */
-    public Config $manager;
+    public $manager;
     /** @var Config $rank*/
-    public Config $rank;
+    public $rank;
     /** @var Config $lang*/
-    public Config $lang;
+    public $lang;
 
     /* SQL */
     public \SQLite3 $database;
