@@ -44,8 +44,6 @@ money-start: 1000
 scoreboard:
   # Do you want to activate the scoreboard?
   enable: true
-  # When should the scoreboard be updated? (20 tick = 1 second)
-  update-tick: 20
   # Insert the title of the score board here.
   title: "§f(§bFE§f)"
   lines:

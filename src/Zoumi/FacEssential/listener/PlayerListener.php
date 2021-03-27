@@ -88,7 +88,6 @@ class PlayerListener implements Listener {
                         $line_actus++;
                     }
                 }
-                Main::getInstance()->getScheduler()->scheduleRepeatingTask(new ScoreboardTask($player), $config->get("scoreboard")["update-tick"]);
             }
             FunctionListener::sendBroadcastByFormat(Main::getInstance()->manager->get("connect-disconnect")["format"], str_replace("{player}", $player->getName(), Main::getInstance()->manager->get("connect-disconnect")["connect-message"]));
         }

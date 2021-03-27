@@ -2,15 +2,19 @@
 
 namespace Zoumi\FacEssential\api;
 
+use Ayzrix\SimpleFaction\API\FactionsAPI;
 use pocketmine\Player;
+use pocketmine\Server;
+use Zoumi\FacEssential\FEPlayer;
 use Zoumi\FacEssential\Main;
+use Zoumi\FacEssential\SQLiteTask;
 
 class Money {
 
     public static function createAccount(Player $player){
         try {
 
-            Main::getInstance()->database->query("INSERT INTO money (pseudo, money) VALUES ('" . $player->getName() . "', '" . Main::getInstance()->manager->get("money-start") . "')");
+            Main::getInstance()->getServer()->getAsyncPool()->submitTask(new SQLiteTask("INSERT INTO money (pseudo, money) VALUES ('" . $player->getName() . "', '" . Main::getInstance()->manager->get("money-start") . "')"));
 
         }catch (\Exception $exception){
 
@@ -31,16 +35,50 @@ class Money {
 
             $calcul = $row['money'] + $row;
 
-            Main::getInstance()->database->query("UPDATE money SET money='" . $calcul . "' WHERE pseudo='" . $player . "'");
+            Main::getInstance()->getServer()->getAsyncPool()->submitTask(new SQLiteTask("UPDATE money SET money='" . $calcul . "' WHERE pseudo='" . $player . "'"));
 
             Main::getInstance()->database->close();
 
         }catch (\Exception $exception){
 
         }
+        $player = Server::getInstance()->getPlayer($player);
+        if ($player instanceof FEPlayer){
+            if (Main::getInstance()->manager->get("scoreboard")["enable"]) {
+                $scoreboard = Main::getInstance()->scoreboard[$player->getName()];
+                $config = Main::getInstance()->manager;
+                $line_actus = 0;
+                if (Main::getInstance()->manager->get("faction-system") === true) {
+                    if (FactionsAPI::isInFaction($player)) {
+                        $faction = FactionsAPI::getFaction($player);
+                        $factionRank = FactionsAPI::getRank($player->getName());
+                        $factionPower = FactionsAPI::getPower($faction);
+                        $factionBank = FactionsAPI::getMoney($faction);
+                    } else {
+                        $faction = "...";
+                        $factionRank = "...";
+                        $factionPower = "...";
+                        $factionBank = "...";
+                    }
+
+                    foreach ($config->get("scoreboard")["lines"] as $line) {
+                        $scoreboard
+                            ->setLine($line_actus, str_replace(["{money}", "{rank}", "{faction_name}", "{faction_rank}", "{faction_power}", "{faction_bank}"], [Money::getMoney($player->getName()), Main::getInstance()->dataPlayers[$player->getName()]["rank"], $faction, $factionRank, $factionPower, $factionBank], $line))->set();
+                        $line_actus++;
+                    }
+                } else {
+                    foreach ($config->get("scoreboard")["lines"] as $line) {
+                        $scoreboard
+                            ->setLine($line_actus, str_replace(["{money}", "{rank}"], [Money::getMoney($player->getName()), Main::getInstance()->dataPlayers[$player->getName()]["rank"]], $line))->set();
+                        $line_actus++;
+                    }
+                }
+            }
+        }
     }
 
-    public static function removeMoney(string $player, float $money){
+    public static function removeMoney(string $player, float $money)
+    {
         try {
 
             $res = Main::getInstance()->database->query("SELECT * FROM money WHERE pseudo='" . $player . "'");
@@ -49,12 +87,45 @@ class Money {
 
             $calcul = $row['money'] - $row;
 
-            Main::getInstance()->database->query("UPDATE money SET money='" . $calcul . "' WHERE pseudo='" . $player . "'");
+            Main::getInstance()->getServer()->getAsyncPool()->submitTask(new SQLiteTask("UPDATE money SET money='" . $calcul . "' WHERE pseudo='" . $player . "'"));
 
             Main::getInstance()->database->close();
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
 
+        }
+        $player = Server::getInstance()->getPlayer($player);
+        if ($player instanceof FEPlayer) {
+            if (Main::getInstance()->manager->get("scoreboard")["enable"]) {
+                $scoreboard = Main::getInstance()->scoreboard[$player->getName()];
+                $config = Main::getInstance()->manager;
+                $line_actus = 0;
+                if (Main::getInstance()->manager->get("faction-system") === true) {
+                    if (FactionsAPI::isInFaction($player)) {
+                        $faction = FactionsAPI::getFaction($player);
+                        $factionRank = FactionsAPI::getRank($player->getName());
+                        $factionPower = FactionsAPI::getPower($faction);
+                        $factionBank = FactionsAPI::getMoney($faction);
+                    } else {
+                        $faction = "...";
+                        $factionRank = "...";
+                        $factionPower = "...";
+                        $factionBank = "...";
+                    }
+
+                    foreach ($config->get("scoreboard")["lines"] as $line) {
+                        $scoreboard
+                            ->setLine($line_actus, str_replace(["{money}", "{rank}", "{faction_name}", "{faction_rank}", "{faction_power}", "{faction_bank}"], [Money::getMoney($player->getName()), Main::getInstance()->dataPlayers[$player->getName()]["rank"], $faction, $factionRank, $factionPower, $factionBank], $line))->set();
+                        $line_actus++;
+                    }
+                } else {
+                    foreach ($config->get("scoreboard")["lines"] as $line) {
+                        $scoreboard
+                            ->setLine($line_actus, str_replace(["{money}", "{rank}"], [Money::getMoney($player->getName()), Main::getInstance()->dataPlayers[$player->getName()]["rank"]], $line))->set();
+                        $line_actus++;
+                    }
+                }
+            }
         }
     }
 
@@ -75,10 +146,43 @@ class Money {
     public static function setMoney(string $player, int $money){
         try {
 
-            Main::getInstance()->database->query("UPDATE money SET money='" . $money . "' WHERE pseudo='" . $player . "'");
+            Main::getInstance()->getServer()->getAsyncPool()->submitTask(new SQLiteTask("UPDATE money SET money='" . $money . "' WHERE pseudo='" . $player . "'"));
 
         }catch (\mysqli_sql_exception $exception){
 
+        }
+        $player = Server::getInstance()->getPlayer($player);
+        if ($player instanceof FEPlayer) {
+            if (Main::getInstance()->manager->get("scoreboard")["enable"]) {
+                $scoreboard = Main::getInstance()->scoreboard[$player->getName()];
+                $config = Main::getInstance()->manager;
+                $line_actus = 0;
+                if (Main::getInstance()->manager->get("faction-system") === true) {
+                    if (FactionsAPI::isInFaction($player)) {
+                        $faction = FactionsAPI::getFaction($player);
+                        $factionRank = FactionsAPI::getRank($player->getName());
+                        $factionPower = FactionsAPI::getPower($faction);
+                        $factionBank = FactionsAPI::getMoney($faction);
+                    } else {
+                        $faction = "...";
+                        $factionRank = "...";
+                        $factionPower = "...";
+                        $factionBank = "...";
+                    }
+
+                    foreach ($config->get("scoreboard")["lines"] as $line) {
+                        $scoreboard
+                            ->setLine($line_actus, str_replace(["{money}", "{rank}", "{faction_name}", "{faction_rank}", "{faction_power}", "{faction_bank}"], [Money::getMoney($player->getName()), Main::getInstance()->dataPlayers[$player->getName()]["rank"], $faction, $factionRank, $factionPower, $factionBank], $line))->set();
+                        $line_actus++;
+                    }
+                } else {
+                    foreach ($config->get("scoreboard")["lines"] as $line) {
+                        $scoreboard
+                            ->setLine($line_actus, str_replace(["{money}", "{rank}"], [Money::getMoney($player->getName()), Main::getInstance()->dataPlayers[$player->getName()]["rank"]], $line))->set();
+                        $line_actus++;
+                    }
+                }
+            }
         }
     }
 
