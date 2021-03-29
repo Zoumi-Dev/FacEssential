@@ -59,7 +59,7 @@ class Chat {
                 $line_actus = 0;
                 if (Main::getInstance()->manager->get("faction-system") === true) {
                     if (FactionsAPI::isInFaction($player)) {
-                        $faction = FactionsAPI::getFaction($player);
+                        $faction = FactionsAPI::getFaction($player->getName());
                         $factionRank = FactionsAPI::getRank($player->getName());
                         $factionPower = FactionsAPI::getPower($faction);
                         $factionBank = FactionsAPI::getMoney($faction);
