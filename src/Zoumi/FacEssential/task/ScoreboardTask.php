@@ -24,7 +24,7 @@ class ScoreboardTask extends Task {
             $line_actus = 0;
             if (Main::getInstance()->manager->get("faction-system") === true) {
                 if (FactionsAPI::isInFaction($this->player)) {
-                    $faction = FactionsAPI::getFaction($this->player);
+                    $faction = FactionsAPI::getFaction($this->player->getName());
                     $factionRank = FactionsAPI::getRank($this->player->getName());
                     $factionPower = FactionsAPI::getPower($faction);
                     $factionBank = FactionsAPI::getMoney($faction);
